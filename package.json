@@ -1,0 +1,16 @@
+{
+   "name": "bot",
+   "version": "1.0.0",
+   "main": "app.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "discord.js": "^11.0.0",
+      "fs": "0.0.1-security"
+   },
+   "devDependencies": {},
+   "description": "A Discord bot that gives users roles depending the game they are playing."
+}
