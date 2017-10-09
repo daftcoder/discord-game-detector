@@ -5,6 +5,7 @@ const GamesMap = {
    'Overwatch': 'Overwatch',
    'PUBG': 'PUBG',
    'DOTA 2': 'DotA',
+   'Hearthstone': 'Hearthstone',
    'Heroes of the Storm': 'HOTS'
 };
 
