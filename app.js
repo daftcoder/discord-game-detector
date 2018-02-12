@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 
 const GamesMap = {
    'Overwatch': 'Overwatch',
-   'PUBG': 'PUBG',
+   'PLAYERUNKNOWN\'S BATTLEGROUNDS': 'PUBG',
    'DOTA 2': 'DotA',
    'Hearthstone': 'Hearthstone',
    'Heroes of the Storm': 'HOTS'
