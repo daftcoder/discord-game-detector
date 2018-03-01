@@ -54,6 +54,7 @@ bot.on('presenceUpdate', function (oldMember, newMember) {
       
    var newRole = newMember.guild.roles.find('name', gameRoleName);
    if (!newRole) {
+      console.log('Role : Game "' + gameName + '" detected, but there\'s no role "' + gameRoleName + '" on the server');
       return;
    }
    
