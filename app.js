@@ -1,13 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-
-const GamesMap = {
-   'Overwatch': 'Overwatch',
-   'PLAYERUNKNOWN\'S BATTLEGROUNDS': 'PUBG',
-   'DOTA 2': 'DotA',
-   'Hearthstone': 'Hearthstone',
-   'Heroes of the Storm': 'HOTS'
-};
+const fs = require('fs');
+const GamesMap = JSON.parse(fs.readFileSync('gamesMap.json', 'utf8'));
 
 // Map of games we don't support (for logging)
 var unsupported = {};
