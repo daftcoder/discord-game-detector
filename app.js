@@ -25,7 +25,16 @@ bot.on('ready', function () {
    var channels = bot.channels.filterArray(function (channel) {
       return channel.type === 'text' && (!channelName || channel.name === channelName);
    });
-   defaultChannel = channels[0];
+
+   if (!channels.length) {
+      if (channelName) {
+         console.log('Channel : There is no channel with name "' + channelName + '"');
+      } else {
+         console.log('Channel : No text channels are available');
+      }
+   } else {
+      defaultChannel = channels[0];
+   }
 });
 
 bot.on('disconnect', function () {
