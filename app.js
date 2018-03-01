@@ -62,7 +62,7 @@ bot.on('presenceUpdate', function (oldMember, newMember) {
    } else {
       var userName = user.username;
       newMember.addRole(newRole).then(function () {
-         defaultChannel.send('Я тут заметил, что ' + user + ' играет в ' + gameName + ' ;)');
+         defaultChannel && defaultChannel.send('Я тут заметил, что ' + user + ' играет в ' + gameName + ' ;)');
          console.log('Role : ' + gameRoleName + ' given to ' + userName);
       }, function (e) {
          console.error(e);
