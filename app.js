@@ -9,15 +9,22 @@ const GamesMap = {
    'Heroes of the Storm': 'HOTS'
 };
 
+// Map of games we don't support (for logging)
 var unsupported = {};
 
+// Text channel to write
 var defaultChannel;
+
+// Channel name for spamming
+var channelName = process.env.CHANNEL || null;
 
 bot.login(process.env.TOKEN);
 
 bot.on('ready', function () {
    console.log('The bot is online !');
-   var channels = bot.channels.filterArray(function(channel){ return channel.type === 'text' });
+   var channels = bot.channels.filterArray(function (channel) {
+      return channel.type === 'text' && (!channelName || channel.name === channelName);
+   });
    defaultChannel = channels[0];
 });
 
@@ -26,18 +33,14 @@ bot.on('disconnect', function () {
 });
 
 bot.on('presenceUpdate', function (oldMember, newMember) {
-   var
-      guild = newMember.guild,
-      user = newMember.user,
-      userName = user.username,
-      gameName, gameRoleName, newRole;
+   var user = newMember.user;
 
    if (!user.presence.game) {
       return;
    }
 
-   gameName = user.presence.game.name;
-   gameRoleName = GamesMap[gameName];
+   var gameName = user.presence.game.name;
+   var gameRoleName = GamesMap[gameName];
    if (!gameRoleName) {
       if (!unsupported.hasOwnProperty(gameName)) {
          unsupported[gameName] = true;
@@ -46,7 +49,7 @@ bot.on('presenceUpdate', function (oldMember, newMember) {
       return;
    }
       
-   newRole = guild.roles.find('name', gameRoleName);
+   var newRole = newMember.guild.roles.find('name', gameRoleName);
    if (!newRole) {
       return;
    }
@@ -54,6 +57,7 @@ bot.on('presenceUpdate', function (oldMember, newMember) {
    if (newMember.roles.has(newRole.id)) {
       //console.log('Role : ' + userName + ' already has ' + gameRoleName);
    } else {
+      var userName = user.username;
       newMember.addRole(newRole).then(function () {
          defaultChannel.send('Я тут заметил, что ' + userName + ' играет в ' + gameName + ' ;)');
          console.log('Role : ' + gameRoleName + ' given to ' + userName);
